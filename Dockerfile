@@ -2,23 +2,14 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y \
-    curl \
+RUN apt-get update && apt-get install -y curl \
     && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir \
-    streamlit \
-    plotly \
-    torch==2.2.0+cpu --index-url https://download.pytorch.org/whl/cpu \
-    scikit-learn \
-    joblib \
-    pandas \
-    numpy \
-    scipy \
-    && pip cache purge
-
 COPY . .
+
+RUN pip install --no-cache-dir streamlit plotly scikit-learn joblib pandas numpy scipy \
+    && pip install --no-cache-dir torch==2.2.0+cpu --index-url https://download.pytorch.org/whl/cpu \
+    && pip cache purge
 
 EXPOSE 8501
 
