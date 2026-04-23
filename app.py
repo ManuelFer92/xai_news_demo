@@ -275,9 +275,9 @@ if ejecutar:
         p   = torch.tensor([[x_q, y_q]], dtype=torch.float32)
         out = model(p)
 
-    sent  = out["sent"].numpy()[0]
-    topic = out["topic"].numpy()[0]
-    fecha = out["fecha"].numpy()[0]
+    sent  = out["sent"].detach().cpu().numpy()[0]
+    topic = out["topic"].detach().cpu().numpy()[0]
+    fecha = out["fecha"].detach().cpu().numpy()[0]
 
     sent_dom = ["Negativo","Neutro","Positivo"][sent.argmax()]
     mes_pred = dec_fecha(fecha[0], fecha[1])
