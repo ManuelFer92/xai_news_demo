@@ -7,8 +7,8 @@ RUN apt-get update && apt-get install -y curl \
 
 COPY . .
 
-RUN pip install --no-cache-dir streamlit plotly scikit-learn joblib pandas numpy scipy \
-    && pip install --no-cache-dir torch==2.2.0+cpu --index-url https://download.pytorch.org/whl/cpu \
+RUN pip install --no-cache-dir torch==2.2.0+cpu --index-url https://download.pytorch.org/whl/cpu \
+    && pip install --no-cache-dir streamlit plotly scikit-learn joblib pandas numpy==1.26.4 scipy \
     && pip cache purge
 
 EXPOSE 8501
